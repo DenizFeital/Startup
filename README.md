@@ -1,3 +1,7 @@
+# Criacao de um programa em Python para tratar duas culturas de uma empresa de agricultura.
+# O sistema deve incluir opcoes para incluir, mostrar, alterar e apagar recursos.
+# Alem disso, os requisitos abaixo devem ser atendidos.
+
 # Requisitos do projeto:
 # Requisito a: "O projeto deve suportar duas culturas"
 # Na function chamada "modulo 1"  declaramos que apenas milho ou soja serão aceitos
