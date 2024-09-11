@@ -4,7 +4,7 @@ import os
 
 # Dados
 vetorcultura = []
-vetorinsumo = []
+vetorinseticida = []
 vetorarea = []
 
 # Função para limpar a tela
@@ -35,17 +35,17 @@ def salvar_dados_csv():
     with open('dados_farmtech.csv', mode='a', newline='') as file:
         writer = csv.writer(file)
         if not header_exists:
-            writer.writerow(['Cultura', 'Área', 'Insumo'])
+            writer.writerow(['Cultura', 'Área', 'inseticida'])
         
         for i in range(len(vetorcultura)):
-            writer.writerow([vetorcultura[i], vetorarea[i], vetorinsumo[i]])
+            writer.writerow([vetorcultura[i], vetorarea[i], vetorinseticida[i]])
     
     exibir_mensagem("Os dados foram salvos no arquivo 'dados_farmtech.csv'.")
 
-def calcular_area_insumo(tipo_cultura, largura, comprimento):
+def calcular_area_inseticida(tipo_cultura, largura, comprimento):
     area = largura * comprimento
-    insumo_por_metro = area * 0.05 if tipo_cultura == 'milho' else area * 0.03
-    return area, insumo_por_metro
+    inseticida_por_metro = area * 0.05 if tipo_cultura == 'milho' else area * 0.03
+    return area, inseticida_por_metro
 
 def input_float(prompt):
     while True:
@@ -65,14 +65,14 @@ def modulo1():
         if tipo_cultura in ['milho', 'soja']:
             largura = input_float(f"Digite a largura do terreno da plantacao de {tipo_cultura} (em metros): ")
             comprimento = input_float(f"Digite o comprimento do terreno da plantacao de {tipo_cultura} (em metros): ")
-            area, insumo_por_metro = calcular_area_insumo(tipo_cultura, largura, comprimento)
+            area, inseticida_por_metro = calcular_area_inseticida(tipo_cultura, largura, comprimento)
             area = round(area, 2)
-            insumo_por_metro = round(insumo_por_metro, 2)
+            inseticida_por_metro = round(inseticida_por_metro, 2)
             exibir_mensagem(f"Para {tipo_cultura}, as seguintes informações foram adicionadas:\n"
                             f"Área total do terreno: {area:.2f} metros quadrados\n"
-                            f"Insumo necessário: {insumo_por_metro:.2f} litros de fertilizante")
+                            f"inseticida necessário: {inseticida_por_metro:.2f} litros de inseticida")
             vetorcultura.append(tipo_cultura)
-            vetorinsumo.append(insumo_por_metro)
+            vetorinseticida.append(inseticida_por_metro)
             vetorarea.append(area)
             print("Dados inseridos com sucesso!\n")
             break
@@ -86,7 +86,7 @@ def modulo2():
     else:
         for i, cultura in enumerate(vetorcultura):
             print(f"{i+1} - Área plantada de {cultura} com {vetorarea[i]:.2f} m², "
-                  f"que necessitam de {vetorinsumo[i]:.2f} litros de insumos.")
+                  f"que necessitam de {vetorinseticida[i]:.2f} litros de inseticidas.")
 
 def modulo3():
     exibir_mensagem("Atualização de Dados")
@@ -96,7 +96,7 @@ def modulo3():
 
     print("Registros atuais:")
     for i, cultura in enumerate(vetorcultura):
-        print(f"{i+1} - {cultura.capitalize()}, Área: {vetorarea[i]:.2f} m², Insumo: {vetorinsumo[i]:.2f} litros")
+        print(f"{i+1} - {cultura.capitalize()}, Área: {vetorarea[i]:.2f} m², inseticida: {vetorinseticida[i]:.2f} litros")
 
     while True:
         try:
@@ -110,18 +110,18 @@ def modulo3():
             print("Por favor, insira um número válido.")
 
     print(f"\nVocê selecionou o registro {escolha+1}: {vetorcultura[escolha].capitalize()}, "
-          f"Área: {vetorarea[escolha]:.2f} m², Insumo: {vetorinsumo[escolha]:.2f} litros")
+          f"Área: {vetorarea[escolha]:.2f} m², inseticida: {vetorinseticida[escolha]:.2f} litros")
 
     print("\nAtualizando os valores...")
     nova_largura = input_float(f"Digite a nova largura do terreno da plantação de {vetorcultura[escolha]} (em metros): ")
     novo_comprimento = input_float(f"Digite o novo comprimento do terreno da plantação de {vetorcultura[escolha]} (em metros): ")
-    nova_area, novo_insumo = calcular_area_insumo(vetorcultura[escolha], nova_largura, novo_comprimento)
+    nova_area, novo_inseticida = calcular_area_inseticida(vetorcultura[escolha], nova_largura, novo_comprimento)
 
     vetorarea[escolha] = round(nova_area, 2)
-    vetorinsumo[escolha] = round(novo_insumo, 2)
+    vetorinseticida[escolha] = round(novo_inseticida, 2)
 
     exibir_mensagem(f"Registro {escolha+1} atualizado com sucesso!\n"
-                    f"Nova área: {vetorarea[escolha]:.2f} m², Novo insumo: {vetorinsumo[escolha]:.2f} litros")
+                    f"Nova área: {vetorarea[escolha]:.2f} m², Novo inseticida: {vetorinseticida[escolha]:.2f} litros")
 
 def modulo4():
     exibir_mensagem("Exclusão de Dados")
@@ -131,7 +131,7 @@ def modulo4():
 
     print("Registros atuais:")
     for i, cultura in enumerate(vetorcultura):
-        print(f"{i+1} - {cultura.capitalize()}, Área: {vetorarea[i]:.2f} m², Insumo: {vetorinsumo[i]:.2f} litros")
+        print(f"{i+1} - {cultura.capitalize()}, Área: {vetorarea[i]:.2f} m², inseticida: {vetorinseticida[i]:.2f} litros")
 
     while True:
         try:
@@ -145,12 +145,12 @@ def modulo4():
             print("Por favor, insira um número válido.")
 
     confirmacao = input(f"Tem certeza que deseja excluir o registro {escolha+1}: {vetorcultura[escolha].capitalize()}, "
-                        f"Área: {vetorarea[escolha]:.2f} m², Insumo: {vetorinsumo[escolha]:.2f} litros? (s/n): ").lower()
+                        f"Área: {vetorarea[escolha]:.2f} m², inseticida: {vetorinseticida[escolha]:.2f} litros? (s/n): ").lower()
 
     if confirmacao == 's':
         del vetorcultura[escolha]
         del vetorarea[escolha]
-        del vetorinsumo[escolha]
+        del vetorinseticida[escolha]
         exibir_mensagem(f"Registro {escolha+1} excluído com sucesso!")
     else:
         print("\nA exclusão foi cancelada.")
