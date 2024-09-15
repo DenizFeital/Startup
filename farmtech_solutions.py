@@ -63,7 +63,7 @@ def salvar_dados_csv():
     with open('dados_farmtech.csv', mode='a', newline='') as file:
         writer = csv.writer(file)
         if not header_exists:
-            writer.writerow(['Cultura', 'Área', 'inseticida'])
+            writer.writerow(['Cultura', 'Área', 'insumos'])
         
         for i in range(len(vetorcultura)):
             writer.writerow([vetorcultura[i], vetorarea[i], vetorinseticida[i]])
@@ -98,7 +98,7 @@ def modulo1():
             inseticida_por_metro = round(inseticida_por_metro, 2)
             exibir_mensagem(f"Para {tipo_cultura}, as seguintes informações foram adicionadas:\n"
                             f"Área total do terreno: {area:.2f} metros quadrados\n"
-                            f"inseticida necessário: {inseticida_por_metro:.2f} litros de inseticida")
+                            f"inseticida necessário: {inseticida_por_metro:.2f} litros de insumos")
             vetorcultura.append(tipo_cultura)
             vetorinseticida.append(inseticida_por_metro)
             vetorarea.append(area)
@@ -114,7 +114,7 @@ def modulo2():
     else:
         for i, cultura in enumerate(vetorcultura):
             print(f"{i+1} - Área plantada de {cultura} com {vetorarea[i]:.2f} m², "
-                  f"que necessitam de {vetorinseticida[i]:.2f} litros de inseticidas.")
+                  f"que necessitam de {vetorinseticida[i]:.2f} litros de insumos.")
 
 def modulo3():
     exibir_mensagem("Atualização de Dados")
@@ -124,7 +124,7 @@ def modulo3():
 
     print("Registros atuais:")
     for i, cultura in enumerate(vetorcultura):
-        print(f"{i+1} - {cultura.capitalize()}, Área: {vetorarea[i]:.2f} m², inseticida: {vetorinseticida[i]:.2f} litros")
+        print(f"{i+1} - {cultura.capitalize()}, Área: {vetorarea[i]:.2f} m², insumo: {vetorinseticida[i]:.2f} litros")
 
     while True:
         try:
@@ -149,7 +149,7 @@ def modulo3():
     vetorinseticida[escolha] = round(novo_inseticida, 2)
 
     exibir_mensagem(f"Registro {escolha+1} atualizado com sucesso!\n"
-                    f"Nova área: {vetorarea[escolha]:.2f} m², Novo inseticida: {vetorinseticida[escolha]:.2f} litros")
+                    f"Nova área: {vetorarea[escolha]:.2f} m², Novo insumo: {vetorinseticida[escolha]:.2f} litros")
 
 def modulo4():
     exibir_mensagem("Exclusão de Dados")
@@ -159,7 +159,7 @@ def modulo4():
 
     print("Registros atuais:")
     for i, cultura in enumerate(vetorcultura):
-        print(f"{i+1} - {cultura.capitalize()}, Área: {vetorarea[i]:.2f} m², inseticida: {vetorinseticida[i]:.2f} litros")
+        print(f"{i+1} - {cultura.capitalize()}, Área: {vetorarea[i]:.2f} m², insumo: {vetorinseticida[i]:.2f} litros")
 
     while True:
         try:
@@ -173,7 +173,7 @@ def modulo4():
             print("Por favor, insira um número válido.")
 
     confirmacao = input(f"Tem certeza que deseja excluir o registro {escolha+1}: {vetorcultura[escolha].capitalize()}, "
-                        f"Área: {vetorarea[escolha]:.2f} m², inseticida: {vetorinseticida[escolha]:.2f} litros? (s/n): ").lower()
+                        f"Área: {vetorarea[escolha]:.2f} m², insumo: {vetorinseticida[escolha]:.2f} litros? (s/n): ").lower()
 
     if confirmacao == 's':
         del vetorcultura[escolha]
